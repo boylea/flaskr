@@ -3,6 +3,9 @@ from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash
 
+import newrelic.agent
+newrelic.agent.initialize('newrelic.ini')
+
 # configuration
 DATABASE = '/tmp/flaskr.db'
 DEBUG = True
@@ -70,4 +73,5 @@ def logout():
     return redirect(url_for('show_entries'))
 
 if __name__ == '__main__':
+    init_db()
     app.run()
